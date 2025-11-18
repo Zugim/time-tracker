@@ -19,10 +19,18 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
-  
+
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
   skipFormatting,
+
+  {
+    name: 'app/rule-overrides',
+    files: ['**/*.{ts,mts,tsx,vue}'], // Ensure this applies to the correct files
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 )

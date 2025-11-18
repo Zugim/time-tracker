@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 
-import { useCounterStore } from './stores/counter'
-
-const counter = useCounterStore()
+import Counter from './components/Counter.vue'
 </script>
 
 <template>
@@ -16,11 +14,7 @@ const counter = useCounterStore()
 
   <p>Track how long you've been working 🧑‍💻</p>
 
-  <h2>Here's a counter!</h2>
-  <p>{{ counter.count }}</p>
-  <button class="btn" @click="counter.increment">Increment Counter</button>
+  <Counter />
 
   <RouterView />
 </template>
-
-<style scoped></style>

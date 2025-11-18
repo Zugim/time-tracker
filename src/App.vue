@@ -1,11 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <h1 class="text-blue-600">Time Tracker</h1>
+  <p class="text-gray-500">Track how long you've been working 🧑‍💻</p>
 </template>
 
 <style scoped></style>

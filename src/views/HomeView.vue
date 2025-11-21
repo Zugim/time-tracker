@@ -1,36 +1,34 @@
 <script setup lang="ts">
-import { useManagerStore } from '@/stores/manager'
+import { useTrackerManagerStore } from '@/stores/trackerManager'
 
-const manager = useManagerStore()
+import { convertSeconds } from '@/utils/convertSeconds'
+
+const trackerManager = useTrackerManagerStore()
 
 function clockIn() {
-  manager.toggleClockedIn()
-  manager.setDateTimeWhenClockedIn()
-  console.log(`Clocked in on ${manager.dateTimeWhenClockedIn}`)
+  trackerManager.toggleClockedIn()
+  trackerManager.setDateTimeWhenClockedIn()
 }
 
 function clockOut() {
-  manager.toggleClockedIn()
-
-  const timeElapsedInSeconds =
-    (new Date().getTime() - manager.dateTimeWhenClockedIn.getTime()) / 1000
-
-  manager.addSecondsWorked(
-    manager.dateTimeWhenClockedIn.toLocaleDateString('ja-JP'),
-    timeElapsedInSeconds,
-  )
+  trackerManager.toggleClockedIn()
+  trackerManager.addSecondsWorked(trackerManager.getDateTimeWhenClockedIn())
 }
 </script>
 
 <template>
   <main>
     <h2>Track how long you've been working 🧑‍💻</h2>
-    <button v-if="manager.clockedIn" @click="clockOut" class="btn">Clock Out</button>
+    <button v-if="trackerManager.getClockedIn()" @click="clockOut" class="btn">Clock Out</button>
     <button v-else @click="clockIn" class="btn">Clock In</button>
-    <p v-if="manager.clockedIn">You clocked in at {{ manager.dateTimeWhenClockedIn }}</p>
+    <p v-if="trackerManager.getClockedIn()">
+      You are clocked in for {{ trackerManager.getDateWhenClockedIn() }}
+    </p>
     <p v-else>
-      You aren't clocked in. So far today you've worked for
-      {{ manager.getSecondsWorkedToday(new Date().toLocaleDateString('ja-JP')) }} seconds
+      You aren't clocked in<span v-if="trackerManager.getSecondsWorkedToday() > 0"
+        >. So far today you've worked for
+        {{ convertSeconds(trackerManager.getSecondsWorkedToday()) }}</span
+      >
     </p>
   </main>
 </template>

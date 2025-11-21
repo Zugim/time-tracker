@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
-import Counter from './components/Counter.vue'
 </script>
 
 <template>
@@ -11,10 +9,5 @@ import Counter from './components/Counter.vue'
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/tracking">Tracking</RouterLink>
   </nav>
-
-  <p>Track how long you've been working 🧑‍💻</p>
-
-  <Counter />
-
   <RouterView />
 </template>
